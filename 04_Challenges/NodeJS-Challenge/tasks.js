@@ -34,11 +34,14 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n' || 'exit\n') {
+  if (text === 'quit\n'|| text === 'exit\n') {
     quit();
   }
   else if(text === 'hello\n'){
     hello();
+  }
+  else if(text === 'help\n'){
+    help();
   }
   else{
     unknownCommand(text);
@@ -56,7 +59,16 @@ function onDataReceived(text) {
 function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
-
+ /**
+  * helps you
+  * 
+  * @returns {void}
+  */
+ function help(){
+  console.log('if you type "hello" you will receive a "hello" message')
+  console.log('if you type "exit" or "quit" you quit the application')
+  console.log('if you type any other text you will receive "unknown command')
+ }
 
 /**
  * Says hello
