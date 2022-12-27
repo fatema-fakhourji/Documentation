@@ -60,7 +60,7 @@ function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
  /**
-  * helps you
+  * helps you by listing all the possible commands
   * 
   * @returns {void}
   */
