@@ -49,6 +49,9 @@ function onDataReceived(text) {
       if(myArray.includes('hello')){
         hello(myArray);
       }
+      else if(myArray.includes('add')){
+        add(myArray);
+      }
       else {
       unknownCommand(text);
       }
@@ -93,11 +96,25 @@ function unknownCommand(c){
  * 
  * @returns {void}
  */
+let tasks = ['clean the room', 'cook the lunch', 'watch a tutorial'];
 function list(){
-  let tasks = ['clean the room', 'cook the lunch', 'watch a tutorial'];
   for (let i  =0; i < tasks.length; i++){
     let j = i + 1;
     console.log(j +'.'+ tasks[i])
+  }
+}
+/**
+ * Adds a new task
+ * 
+ * @returns {void}
+ */
+function add(myArray){
+  myArray.shift();
+  let q = myArray.join(' ')
+  if (q == "")
+  console.log('error');
+  else {
+  tasks.push(q);
   }
 }
 /**
