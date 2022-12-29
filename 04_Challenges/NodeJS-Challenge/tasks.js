@@ -80,6 +80,10 @@ function unknownCommand(c){
   console.log('if you type any sentence that starts with "hello" you will receive your sentence as a message')
   console.log('if you type "exit" or "quit" you quit the application')
   console.log('if you type any other text you will receive "unknown command')
+  console.log('if you type "list" you will get a list of tasks to do')
+  console.log('if you type "add" you will be able to add to the list of tasks')
+  console.log('if you type "remove" you will remove the last element of the tasks')
+  console.log('if you type "remove" followed by a number, you will remove the task associated with that number')
  }
 
 /**
