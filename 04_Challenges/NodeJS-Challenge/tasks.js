@@ -37,17 +37,20 @@ function onDataReceived(text) {
   if (text === 'quit\n'|| text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
-  }
   else if(text === 'help\n'){
     help();
   }
   else{
-    unknownCommand(text);
+    let textt = text.trim();
+    const myArray = textt.split(" ");
+      if(myArray.includes('hello')){
+        hello(myArray);
+      }
+      else {
+      unknownCommand(text);
+      }
   }
 }
-
 
 /**
  * prints "unknown command"
@@ -75,8 +78,10 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(myArray){
+  let p = "hello!"
+  let result = p.replace("hello!", myArray[0] +" "+ myArray[1]);
+  console.log(result +"!")
 }
 
 
