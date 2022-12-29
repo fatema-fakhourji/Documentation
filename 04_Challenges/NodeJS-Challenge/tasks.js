@@ -135,9 +135,13 @@ function remove(myArray){
   for (let i  =1; i < tasks.length; i++){
     if (q == 0){
     tasks.pop();
-  } else if(i == q){
+    } else if(i == q){
     tasks.splice([i-1], 1);
-  }
+    }
+    else if(q > tasks.length) {
+      console.log("number does not exist")
+      break
+    }
   }
 }
 /**
