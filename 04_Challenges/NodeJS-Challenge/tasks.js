@@ -68,7 +68,7 @@ function unknownCommand(c){
   * @returns {void}
   */
  function help(){
-  console.log('if you type "hello" you will receive a "hello" message')
+  console.log('if you type any sentence that starts with "hello" you will receive your sentence as a message')
   console.log('if you type "exit" or "quit" you quit the application')
   console.log('if you type any other text you will receive "unknown command')
  }
