@@ -40,6 +40,9 @@ function onDataReceived(text) {
   else if(text === 'help\n'){
     help();
   }
+  else if(text === 'list\n'){
+    list();
+  }
   else{
     let textt = text.trim();
     const myArray = textt.split(" ");
@@ -85,7 +88,18 @@ function unknownCommand(c){
   console.log(result +"!")
   }
 
-
+/**
+ * Lists all the tasks
+ * 
+ * @returns {void}
+ */
+function list(){
+  let tasks = ['clean the room', 'cook the lunch', 'watch a tutorial'];
+  for (let i  =0; i < tasks.length; i++){
+    let j = i + 1;
+    console.log(j +'.'+ tasks[i])
+  }
+}
 /**
  * Exits the application
  *
