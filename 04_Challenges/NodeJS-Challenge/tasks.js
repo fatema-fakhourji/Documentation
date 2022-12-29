@@ -52,6 +52,9 @@ function onDataReceived(text) {
       else if(myArray.includes('add')){
         add(myArray);
       }
+      else if(myArray.includes('remove')){
+        remove(myArray);
+      }
       else {
       unknownCommand(text);
       }
@@ -111,10 +114,26 @@ function list(){
 function add(myArray){
   myArray.shift();
   let q = myArray.join(' ')
-  if (q == "")
+  if (q == ""){
   console.log('error');
-  else {
+  }else {
   tasks.push(q);
+  }
+}
+/**
+ * Removes the last element in tasks
+ * 
+ * @returns {void}
+ */
+function remove(myArray){
+  myArray.shift();
+  let q = myArray.join(' ')
+  for (let i  =1; i < tasks.length; i++){
+    if (q == 0){
+    tasks.pop();
+  } else if(i == q){
+    tasks.splice([i-1], 1);
+  }
   }
 }
 /**
