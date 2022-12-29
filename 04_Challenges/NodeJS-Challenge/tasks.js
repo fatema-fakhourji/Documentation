@@ -78,11 +78,12 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(myArray){
+ function hello(myArray){
   let p = "hello!"
-  let result = p.replace("hello!", myArray[0] +" "+ myArray[1]);
+  let u = myArray.join(' ')
+  let result = p.replace("hello!", u);
   console.log(result +"!")
-}
+  }
 
 
 /**
