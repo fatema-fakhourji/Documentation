@@ -55,12 +55,14 @@ function onDataReceived(text) {
       else if(myArray.includes('remove')){
         remove(myArray);
       }
+      else if(myArray.includes('edit')){
+        edit(myArray)
+      }
       else {
       unknownCommand(text);
       }
   }
 }
-
 /**
  * prints "unknown command"
  * This function is supposed to run when all other commands have failed
@@ -125,7 +127,7 @@ function add(myArray){
   }
 }
 /**
- * Removes the last element in tasks
+ * Removes elements in tasks
  * 
  * @returns {void}
  */
@@ -139,6 +141,36 @@ function remove(myArray){
     tasks.splice([i-1], 1);
     }
     else if(q > tasks.length) {
+      console.log("number does not exist")
+      break
+    }
+  }
+}
+/**
+ * edits the elements in tasks
+ * 
+ * @returns {void}
+ */
+ function edit(myArray){
+  let t = myArray.splice(1, 1);
+  let s = myArray
+  s.shift()
+  s.unshift(t)
+  let ss = s.join(' ')
+  myArray.shift()
+  let q = myArray.join(' ')
+  let n = tasks.length;
+  for (let i  = 1; i < tasks.length; i++){
+    if (t == ""){
+      console.log('error');
+      break
+    } else if (isNaN(t) == true){
+      tasks[n-1] = ss;
+    }
+      else if(i == t){
+      tasks[i - 1] = q;
+    }
+    else if(t > tasks.length) {
       console.log("number does not exist")
       break
     }
