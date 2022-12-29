@@ -86,6 +86,8 @@ function unknownCommand(c){
   console.log('if you type "add" you will be able to add to the list of tasks')
   console.log('if you type "remove" you will remove the last element of the tasks')
   console.log('if you type "remove" followed by a number, you will remove the task associated with that number')
+  console.log('if you type "edit" you will remove the last element of the tasks')
+  console.log('if you type "edit" followed by a number, you will remove the task associated with that number')
  }
 
 /**
