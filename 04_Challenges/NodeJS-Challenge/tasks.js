@@ -58,6 +58,12 @@ function onDataReceived(text) {
       else if(myArray.includes('edit')){
         edit(myArray)
       }
+      else if(myArray.includes('check')){
+        check(myArray)
+      }
+      else if(myArray.includes('uncheck')){
+        uncheck(myArray)
+      }
       else {
       unknownCommand(text);
       }
@@ -107,11 +113,28 @@ function unknownCommand(c){
  * 
  * @returns {void}
  */
-let tasks = ['clean the room', 'cook the lunch', 'watch a tutorial'];
+let tasks = [
+  {
+    title: "clean the room",
+    value: 'done',
+  }, 
+  {
+    title: 'cook the lunch',
+    value: 'undone',
+  },
+  {
+    title: 'watch a tutorial',
+    value: 'undone',
+  }
+];
 function list(){
   for (let i  =0; i < tasks.length; i++){
     let j = i + 1;
-    console.log(j +'.'+ tasks[i])
+    if (tasks[i].value === 'done'){
+    console.log(j +'.[✓] '+ tasks[i].title)
+    } else {
+    console.log(j +'.[ ] '+ tasks[i].title) 
+    }
   }
 }
 /**
@@ -125,7 +148,8 @@ function add(myArray){
   if (q == ""){
   console.log('error');
   }else {
-  tasks.push(q);
+  let z = {title: q, value:""};
+  tasks.push(z);
   }
 }
 /**
@@ -136,7 +160,7 @@ function add(myArray){
 function remove(myArray){
   myArray.shift();
   let q = myArray.join(' ')
-  for (let i  =1; i < tasks.length; i++){
+  for (let i  =1; i <= tasks.length; i++){
     if (q == 0){
     tasks.pop();
     } else if(i == q){
@@ -159,20 +183,64 @@ function remove(myArray){
   s.shift()
   s.unshift(t)
   let ss = s.join(' ')
+  let sss= {title: ss, value:""};
   myArray.shift()
   let q = myArray.join(' ')
+  let z = {title: q, value:""};
   let n = tasks.length;
   for (let i  = 1; i < tasks.length; i++){
     if (t == ""){
       console.log('error');
       break
     } else if (isNaN(t) == true){
-      tasks[n-1] = ss;
+      tasks[n-1] = sss;
     }
       else if(i == t){
-      tasks[i - 1] = q;
+      tasks[i - 1] = z;
     }
     else if(t > tasks.length) {
+      console.log("number does not exist")
+      break
+    }
+  }
+}
+/**
+ * Checks values in tasks
+ * 
+ * @returns {void}
+ */
+ function check(myArray){
+  myArray.shift();
+  let q = myArray.join(' ')
+  for (let i  =1; i <= tasks.length; i++){
+    if (q == 0){
+    console.log('error');
+    break
+    } else if(i == q){
+    tasks[i-1].value = 'done';
+    }
+    else if(q > tasks.length) {
+      console.log("number does not exist")
+      break
+    }
+  }
+}
+/**
+ * Unchecks values in tasks
+ * 
+ * @returns {void}
+ */
+ function uncheck(myArray){
+  myArray.shift();
+  let q = myArray.join(' ')
+  for (let i  =1; i <= tasks.length; i++){
+    if (q == 0){
+    console.log('error');
+    break
+    } else if(i == q){
+    tasks[i-1].value = 'undone';
+    }
+    else if(q > tasks.length) {
       console.log("number does not exist")
       break
     }
