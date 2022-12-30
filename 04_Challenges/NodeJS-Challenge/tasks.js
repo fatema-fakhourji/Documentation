@@ -163,8 +163,9 @@ function remove(myArray){
   myArray.shift();
   let q = myArray.join(' ')
   for (let i  =1; i <= tasks.length; i++){
-    if (q == 0){
+    if (q == ''){
     tasks.pop();
+    break
     } else if(i == q){
     tasks.splice([i-1], 1);
     }
@@ -185,10 +186,10 @@ function remove(myArray){
   s.shift()
   s.unshift(t)
   let ss = s.join(' ')
-  let sss= {title: ss, value:""};
+  let sss= {title: ss, value:'undone'};
   myArray.shift()
   let q = myArray.join(' ')
-  let z = {title: q, value:""};
+  let z = {title: q, value:'undone'};
   let n = tasks.length;
   for (let i  = 1; i < tasks.length; i++){
     if (t == ""){
