@@ -111,6 +111,18 @@ app.get("/movies/read/by-rating", (req, res) => {
 app.get("/movies/read/by-title", (req, res) => {
     res.json({status:200, data:bytitle})
    });
+app.get("/movies/read/id/:uId", (req, res) => {
+    for (let i = 0; i < movies.length; i++){
+    if (req.params.uId === movies[i].title){
+    res.json({status:200, data:movies[i]})
+    }
+    }
+    for (let i = 0; i < movies.length; i++){
+        if (req.params.uId !== movies[i].title){
+            res.json({status:404, error:true, message:'the movie' + " " + req.params.uId + " " + 'does not exist'})
+        }
+    }
+   });
 app.listen(3000, () => {
     console.log("Listen on the port 3000...");
 });
