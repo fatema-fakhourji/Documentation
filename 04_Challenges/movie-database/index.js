@@ -123,6 +123,36 @@ app.get("/movies/read/id/:uId", (req, res) => {
         }
     }
    });
-app.listen(3000, () => {
+app.get("/movies/add?title=:utitle&year=:uyear&rating=:urating", (req, res) => {
+    let y = req.params.uyear;
+    let z = {title: req.params.utitle, year: req.params.uyear, rating: req.params.urating};
+    if (y.length !== 4){
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+    } else if (isNaN(y) == true){
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+    } else {
+    movies.push(z);
+    res.json({status:200, data:movies})
+    }
+   });
+app.get("/movies/add?title=&year=:uyear&rating=:urating", (req, res) => {
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+   });
+app.get("/movies/add?title=:utitle&year=&rating=:urating", (req, res) => {
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+   });
+app.get("/movies/add?title=:utitle&year=:uyear&rating=", (req, res) => {
+    let y = req.params.uyear;
+    let z = {title: req.params.utitle, year: req.params.uyear, rating: "4"};
+    if (y.length !== 4){
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+    } else if (isNaN(y) == true){
+    res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
+    } else {
+    movies.push(z);
+    res.json({status:200, data:movies})
+    }
+   });
+app.listen(8000, () => {
     console.log("Listen on the port 3000...");
 });
