@@ -11,8 +11,64 @@ const movies = [
     { title: 'Brazil', year: 1985, rating: 8 },
     { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
 ]
+const movies1 = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+const movies2 = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+const movies3 = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+function date( a, b ) {
+    if ( a.year < b.year ){
+      return -1;
+    }
+    if ( a.year > b.year ){
+      return 1;
+    }
+    return 0;
+  }
+let bydate = movies1.sort(date);
+function rating( c, d ) {
+    if ( c.rating < d.rating ){
+      return 1;
+    }
+    if ( c.rating > d.rating ){
+      return -1;
+    }
+    if (c.rating === d.rating){
+        if ( c.title < d.title ){
+            return -1;
+          }
+          if ( c.title > d.title ){
+            return 1;
+          }
+          return 0;
+    }
+    return 0;
+  }
+let byrating = movies2.sort(rating);
+function title( e, f ) {
+    if ( e.title < f.title ){
+      return -1;
+    }
+    if ( e.title > f.title ){
+      return 1;
+    }
+    return 0;
+  }
+let bytitle = movies3.sort(title);
 let Mov = movies.join("\n");
-
 app.get("/", (request, response) => {
     response.send("Ok");
 });
@@ -45,6 +101,15 @@ app.get("/movies/update", (req, res) => {
    });
 app.get("/movies/delete", (req, res) => {
     res.json({status:200, message:"ok delete"})
+   });
+app.get("/movies/read/by-date", (req, res) => {
+    res.json({status:200, data:bydate})
+   });
+app.get("/movies/read/by-rating", (req, res) => {
+    res.json({status:200, data:byrating})
+   });
+app.get("/movies/read/by-title", (req, res) => {
+    res.json({status:200, data:bytitle})
    });
 app.listen(3000, () => {
     console.log("Listen on the port 3000...");
