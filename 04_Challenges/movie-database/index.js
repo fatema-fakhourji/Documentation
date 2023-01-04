@@ -11,24 +11,6 @@ const movies = [
     { title: 'Brazil', year: 1985, rating: 8 },
     { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
 ]
-const movies1 = [
-    { title: 'Jaws', year: 1975, rating: 8 },
-    { title: 'Avatar', year: 2009, rating: 7.8 },
-    { title: 'Brazil', year: 1985, rating: 8 },
-    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
-]
-const movies2 = [
-    { title: 'Jaws', year: 1975, rating: 8 },
-    { title: 'Avatar', year: 2009, rating: 7.8 },
-    { title: 'Brazil', year: 1985, rating: 8 },
-    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
-]
-const movies3 = [
-    { title: 'Jaws', year: 1975, rating: 8 },
-    { title: 'Avatar', year: 2009, rating: 7.8 },
-    { title: 'Brazil', year: 1985, rating: 8 },
-    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
-]
 function date( a, b ) {
     if ( a.year < b.year ){
       return -1;
@@ -38,7 +20,6 @@ function date( a, b ) {
     }
     return 0;
   }
-let bydate = movies1.sort(date);
 function rating( c, d ) {
     if ( c.rating < d.rating ){
       return 1;
@@ -57,7 +38,6 @@ function rating( c, d ) {
     }
     return 0;
   }
-let byrating = movies2.sort(rating);
 function title( e, f ) {
     if ( e.title < f.title ){
       return -1;
@@ -67,8 +47,6 @@ function title( e, f ) {
     }
     return 0;
   }
-let bytitle = movies3.sort(title);
-let Mov = movies.join("\n");
 app.get("/", (request, response) => {
     response.send("Ok");
 });
@@ -103,12 +81,15 @@ app.get("/movies/delete", (req, res) => {
     res.json({status:200, message:"ok delete"})
    });
 app.get("/movies/read/by-date", (req, res) => {
+    let bydate = movies.sort(date);
     res.json({status:200, data:bydate})
    });
 app.get("/movies/read/by-rating", (req, res) => {
+    let byrating = movies.sort(rating);
     res.json({status:200, data:byrating})
    });
 app.get("/movies/read/by-title", (req, res) => {
+    let bytitle = movies.sort(title);
     res.json({status:200, data:bytitle})
    });
 app.get("/movies/read/id/:uId", (req, res) => {
@@ -125,7 +106,9 @@ app.get("/movies/read/id/:uId", (req, res) => {
    });
 app.get("/movies/add?title=:utitle&year=:uyear&rating=:urating", (req, res) => {
     let y = req.params.uyear;
-    let z = {title: req.params.utitle, year: req.params.uyear, rating: req.params.urating};
+    let x = req.params.utitle;
+    const str2 = x.charAt(0).toUpperCase() + x.slice(1);
+    let z = {title: str2, year: req.params.uyear, rating: req.params.urating};
     if (y.length !== 4){
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
     } else if (isNaN(y) == true){
@@ -153,6 +136,19 @@ app.get("/movies/add?title=:utitle&year=:uyear&rating=", (req, res) => {
     res.json({status:200, data:movies})
     }
    });
-app.listen(8000, () => {
+app.get("/movies/delete/:uuId", (req, res) => {
+    for (let i = 0; i < movies.length; i++){
+    if (req.params.uuId === movies[i].title){
+        movies.splice([i], 1);
+        res.json({status:200, data:movies})
+    }
+    }
+    for (let i = 0; i < movies.length; i++){
+        if (req.params.uuId !== movies[i].title){
+            res.json({status:404, error:true, message:'the movie' + " " + req.params.uuId + " " + 'does not exist'})
+        }
+    }
+   });
+app.listen(3000, () => {
     console.log("Listen on the port 3000...");
 });
