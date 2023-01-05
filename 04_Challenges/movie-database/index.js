@@ -92,23 +92,23 @@ app.get("/movies/read/by-title", (req, res) => {
     let bytitle = movies.sort(title);
     res.json({status:200, data:bytitle})
    });
-app.get("/movies/read/id/:uId", (req, res) => {
+app.get("/movies/read/id/:ID", (req, res) => {
     for (let i = 0; i < movies.length; i++){
-    if (req.params.uId === movies[i].title){
+    if (req.params.ID === movies[i].title){
     res.json({status:200, data:movies[i]})
     }
     }
     for (let i = 0; i < movies.length; i++){
-        if (req.params.uId !== movies[i].title){
+        if (req.params.ID !== movies[i].title){
             res.json({status:404, error:true, message:'the movie' + " " + req.params.uId + " " + 'does not exist'})
         }
     }
    });
-app.get("/movies/add?title=:utitle&year=:uyear&rating=:urating", (req, res) => {
-    let y = req.params.uyear;
-    let x = req.params.utitle;
+app.get("/movies/add", (req, res) => {
+    let y = req.query.year;
+    let x = req.query.title;
     const str2 = x.charAt(0).toUpperCase() + x.slice(1);
-    let z = {title: str2, year: req.params.uyear, rating: req.params.urating};
+    let z = {title: str2, year: y, rating: req.query.rating};
     if (y.length !== 4){
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
     } else if (isNaN(y) == true){
@@ -118,15 +118,17 @@ app.get("/movies/add?title=:utitle&year=:uyear&rating=:urating", (req, res) => {
     res.json({status:200, data:movies})
     }
    });
-app.get("/movies/add?title=&year=:uyear&rating=:urating", (req, res) => {
+app.get("/movies/add", (req, res) => {
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
    });
-app.get("/movies/add?title=:utitle&year=&rating=:urating", (req, res) => {
+app.get("/movies/add", (req, res) => {
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
    });
-app.get("/movies/add?title=:utitle&year=:uyear&rating=", (req, res) => {
-    let y = req.params.uyear;
-    let z = {title: req.params.utitle, year: req.params.uyear, rating: "4"};
+app.get("/movies/add", (req, res) => {
+    let y = req.query.year;
+    let x = req.query.title;
+    const str2 = x.charAt(0).toUpperCase() + x.slice(1);
+    let z = {title: str2, year: y, rating: "4"};
     if (y.length !== 4){
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
     } else if (isNaN(y) == true){
@@ -136,16 +138,33 @@ app.get("/movies/add?title=:utitle&year=:uyear&rating=", (req, res) => {
     res.json({status:200, data:movies})
     }
    });
-app.get("/movies/delete/:uuId", (req, res) => {
+app.get("/movies/delete/:ID", (req, res) => {
     for (let i = 0; i < movies.length; i++){
-    if (req.params.uuId === movies[i].title){
+    if (req.params.ID === movies[i].title){
         movies.splice([i], 1);
         res.json({status:200, data:movies})
     }
     }
     for (let i = 0; i < movies.length; i++){
-        if (req.params.uuId !== movies[i].title){
+        if (req.params.ID !== movies[i].title){
             res.json({status:404, error:true, message:'the movie' + " " + req.params.uuId + " " + 'does not exist'})
+        }
+    }
+   });
+app.get("/movies/update/:ID", (req, res) => {
+    for (let i = 0; i < movies.length; i++){
+        let ntt = req.query.title
+        let nr = req.query.rating
+        const str2 = ntt.charAt(0).toUpperCase() + ntt.slice(1);
+    if (req.params.ID === movies[i].title){
+        movies[i].title = str2;
+        movies[i].rating = nr;
+        res.json({status:200, data:movies})
+    }
+    }
+    for (let i = 0; i < movies.length; i++){
+        if (req.params.ID !== movies[i].title){
+            res.json({status:404, error:true, message:'the movie' + " " + req.params.op + " " + 'does not exist'})
         }
     }
    });
