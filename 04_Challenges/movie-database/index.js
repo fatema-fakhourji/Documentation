@@ -68,16 +68,16 @@ app.get("/search?s=", (req, res) => {
 app.get("/search?s=:SEARCH", (req, res) => {
     res.json({status:200, message:"ok", data:req.params.SEARCH})
    });
-app.get("/movies/create", (req, res) => {
+app.post("/movies/create", (req, res) => {
     res.json({status:200, message:"ok create"})
    });
 app.get("/movies/read", (req, res) => {
     res.json({status:200, data:movies})
    });
-app.get("/movies/update", (req, res) => {
+app.patch("/movies/update", (req, res) => {
     res.json({status:200, message:"ok update"})
    });
-app.get("/movies/delete", (req, res) => {
+app.delete("/movies/delete", (req, res) => {
     res.json({status:200, message:"ok delete"})
    });
 app.get("/movies/read/by-date", (req, res) => {
@@ -104,7 +104,7 @@ app.get("/movies/read/id/:ID", (req, res) => {
         }
     }
    });
-app.get("/movies/add", (req, res) => {
+app.post("/movies/add", (req, res) => {
     let y = req.query.year;
     let x = req.query.title;
     const str2 = x.charAt(0).toUpperCase() + x.slice(1);
@@ -118,13 +118,13 @@ app.get("/movies/add", (req, res) => {
     res.json({status:200, data:movies})
     }
    });
-app.get("/movies/add", (req, res) => {
+app.post("/movies/add", (req, res) => {
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
    });
-app.get("/movies/add", (req, res) => {
+app.post("/movies/add", (req, res) => {
     res.json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'})
    });
-app.get("/movies/add", (req, res) => {
+app.post("/movies/add", (req, res) => {
     let y = req.query.year;
     let x = req.query.title;
     const str2 = x.charAt(0).toUpperCase() + x.slice(1);
@@ -138,7 +138,7 @@ app.get("/movies/add", (req, res) => {
     res.json({status:200, data:movies})
     }
    });
-app.get("/movies/delete/:ID", (req, res) => {
+app.delete("/movies/delete/:ID", (req, res) => {
     for (let i = 0; i < movies.length; i++){
     if (req.params.ID === movies[i].title){
         movies.splice([i], 1);
@@ -151,7 +151,7 @@ app.get("/movies/delete/:ID", (req, res) => {
         }
     }
    });
-app.get("/movies/update/:ID", (req, res) => {
+app.patch("/movies/update/:ID", (req, res) => {
     for (let i = 0; i < movies.length; i++){
         let ntt = req.query.title
         let nr = req.query.rating
