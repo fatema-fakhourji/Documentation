@@ -1,0 +1,16 @@
+{
+    "tasks": [
+    {
+      "title": "clean the room",
+      "value": "done"
+    }, 
+    {
+      "title": "cook the lunch",
+      "value": "undone"
+    },
+    {
+      "title": "watch a tutorial",
+      "value": "undone"
+    }
+  ]
+}

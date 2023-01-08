@@ -249,16 +249,21 @@ function remove(myArray){
     }
   }
 }
+const fs = require('fs');
 /**
  * Exits the application
  *
  * @returns {void}
  */
 function quit(){
+  var obj = JSON.parse(json);
+  var new_json = JSON.stringify(obj)
   console.log('Quitting now, goodbye!')
   process.exit();
 }
 function exit(){
+  var obj = JSON.parse(json);
+  var new_json = JSON.stringify(obj)
   console.log('Quitting now, goodbye!')
   process.exit();
 }
